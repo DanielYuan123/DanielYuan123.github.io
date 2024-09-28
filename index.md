@@ -30,7 +30,7 @@
 
 ## <u>RESEARCH EXPERIENCES</u>
 
-#### <span><div align="left">Prof. Fengwei Zhang’s Research Group<div align="right">**Shenzhen, China**</div></div></span>
+#### Prof. Fengwei Zhang’s Research Group<div style="length: 100%"></div>**Shenzhen, China**
 
 *Computer security research group dedicated to exploring system security based on Arm and X86 architectures affiliated to COMPASS Lab, which actively collaborates with leading technology companies to integrate cutting-edge research into practical applications including joint projects with semiconductor companies, cybersecurity firms, and cloud service providers to enhance system security and performance. The focus is particularly on the latest features introduced in the ARM v9 architecture, including the Confidential Compute Architecture (CCA), and their implications for future computer system architectures.*
 
