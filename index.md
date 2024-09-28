@@ -12,9 +12,9 @@
 
 ## <u>EDUCATION</u>
 
-**Southern University Of Science and Technology                                                 						Shenzhen, China**
-***Department of Computer Science and Engineering***
-***B.E. in Computer Science and Technology***	               											   ***09/2021- 09/2025***
+**Southern University Of Science and Technology  <p align="right">Shenzhen, China</p>**
+***Department of Computer Science and Engineering***</br>
+***B.E. in Computer Science and Technology***	               											    <p align="right">***09/2021- 09/2025***</p>
 
 **Overall GPA: 3.73/4.0**  	
 
@@ -30,11 +30,13 @@
 
 ## <u>RESEARCH EXPERIENCES</u>
 
-#### Prof. Fengwei Zhang’s Research Group                                                                               **Shenzhen, China**
+
+
+#### Prof. Fengwei Zhang’s Research Group                                                                               <p align="right">**Shenzhen, China**</p>
 
 *Computer security research group dedicated to exploring system security based on Arm and X86 architectures affiliated to COMPASS Lab, which actively collaborates with leading technology companies to integrate cutting-edge research into practical applications including joint projects with semiconductor companies, cybersecurity firms, and cloud service providers to enhance system security and performance. The focus is particularly on the latest features introduced in the ARM v9 architecture, including the Confidential Compute Architecture (CCA), and their implications for future computer system architectures.*
 
-***Undergraduate Research Assistant, Advisor: Prof. Fengwei  Zhang***                                                     			***04/2024 - Present***
+***Undergraduate Research Assistant, Advisor: Prof. Fengwei  Zhang***                                                     			<p align="right">***04/2024 - Present*****</p>
 
 * Project: Implement Device Isolation Based on Raspberry Pi and QEMU
   * Collaborated with a team to research the Confidential Compute Architecture (CCA) introduced in Armv9.2-A, which aims to ensure the confidentiality and integrity of third-party user data.
@@ -42,10 +44,10 @@
   * Developed methods to achieve secure assignment of device interfaces in the Realm world, preventing unauthorized access to sensitive data.
   * Simulated the Realm Management Extension (RME) and Realm Management Monitor (RMM) functionalities using QEMU, an open-source hardware emulator.
 
-#### Prof. Hao Song’s Research Group                                                                                          Shenzhen, China
+#### Prof. Hao Song’s Research Group                                                                                          <p align="right">Shenzhen, China</p>
 
 *Led by Prof. Hao Song, this undergraduate research group focuses on the exploration of large-scale model algorithms and their applications in smart city systems. The group is dedicated to advancing the understanding and implementation of intelligent urban solutions through innovative research.*
-***Undergraduate Research Assistant, Advisor: Prof. Hao Song***                                                            	  		  ***08/2023 - 01/2024***
+***Undergraduate Research Assistant, Advisor: Prof. Hao Song***                                                            	  		  <p align="right">***08/2023 - 01/2024***</p>
 
 * Project: Evaluate GPT Performance in Traffic Flow Prediction and Trajectory Prediction
   * Evaluated the performance of GPT models in predicting traffic flow and vehicle trajectories, developing innovative approaches to improve prediction accuracy and efficiency.
@@ -62,6 +64,6 @@
 
 ## <u>HONORS&AWARDS</u>
 
-* **Excellent Award, Shuwei Cup**                                                                                                                                    			    **2024**  
-* **Outstanding Student Scholarship, Southern University of Science and Technology**                                                            **2023** 
-* **Outstanding Freshman Scholarship, Southern University of Science and Technology**                                                        **2021**     
+* **Excellent Award, Shuwei Cup**                                                                                                                                    			    <p align="right">**2024**</p>  
+* **Outstanding Student Scholarship, Southern University of Science and Technology**                                                            <p align="right">**2023**</p> 
+* **Outstanding Freshman Scholarship, Southern University of Science and Technology**                                                        <p align="right">**2021**</p>     
