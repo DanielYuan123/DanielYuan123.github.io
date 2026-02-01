@@ -1,158 +1,304 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Yuan Zihan's Home Page</title>
-    <link rel="icon" type="image/png" href="./img/SUSTech Logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zihan Yuan | Rice University & MSTech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #00205B; /* Rice Blue */
+            --accent-color: #5EA85C;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --bg-body: #f4f7f9;
+        }
+
         body {
-            font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-            color: black;
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0;
+            padding: 0;
+            position: relative;
         }
-        body a {
-            color: #336699;
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* 科技感网格纹理 */
+            background-image:
+                    radial-gradient(circle at 2px 2px, rgba(0, 32, 91, 0.05) 1px, transparent 0),
+                    linear-gradient(rgba(0, 32, 91, 0.02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 32, 91, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px, 20px 20px, 20px 20px;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            box-shadow: 0 20px 50px rgba(0,32,91,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+
+        /* --- Header Section --- */
+        .hero-section {
+            padding: 60px 60px 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .profile-info { flex: 1; }
+        .profile-info h1 {
+            font-size: 3.2rem;
+            margin: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+        }
+
+        .title-tag {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin: 10px 0;
+        }
+
+        .contact-links {
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            color: var(--text-main);
             text-decoration: none;
+            margin-right: 20px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #ddd;
+            transition: 0.3s;
         }
-        body a:hover {
-            text-decoration: underline;
+
+        .contact-links a:hover { color: var(--primary-color); border-color: var(--primary-color); }
+
+        .profile-photo-container img {
+            width: 200px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        div.main {
-            width: 70em;
-            padding: 2em;
-            border: 4px solid #5EA85C;
-            margin: 1px auto;
-            background-color: white;
+
+        /* --- Logo Bar (The "Trust Bar") --- */
+        .logo-bar {
+            background: #fcfdfe;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 30px 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
         }
-        img.logo, img.head {
-            float: right;
+
+        .logo-bar img {
+            height: 70px;
+            width: auto;
+            max-width: 180px;
+            transition: all 0.4s ease;
         }
-        .paper .title {
-            font-weight: bold;
+
+        .logo-bar img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
         }
-        .paper .author {
-            color: #000;
+
+        /* --- Main Content Area --- */
+        .main-content {
+            padding: 20px 60px 60px 60px;
         }
-        .paper .myname {
-            color: #990000;
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .paper .conference {
-            font-style: italic;
+
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
         }
-        .paper .s1 {
-            background-color: #E8F1F5;
-            padding: 0.6em;
+
+        .item { margin-bottom: 35px; }
+        .item-header { display: flex; justify-content: space-between; font-weight: 700; color: #111; }
+        .date { color: var(--text-light); font-weight: 400; font-size: 0.9rem; }
+        .item-sub { color: var(--accent-color); font-weight: 600; margin-bottom: 5px; }
+
+        .tag {
+            display: inline-block;
+            background: #f0f4f8;
+            color: #445;
+            padding: 5px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin: 5px 5px 0 0;
+            font-weight: 500;
         }
-        .paper .s2 {
-            padding: 0.6em;
+
+        footer {
+            background: #2d3436;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { flex-direction: column-reverse; padding: 40px 30px; text-align: center; }
+            .profile-photo-container { margin: 0 auto 30px auto; }
+            .logo-bar { flex-direction: column; padding: 40px 20px; }
+            .main-content { padding: 20px 30px; }
+            .profile-info h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="main">
-      <table with=600>
-        <tr>
-          <td align="left" valign="center" width=410; style="padding-top:2em">
-            <h2><font face="Verdana" size=6>Yuan Zihan</font> <img src="img/name.png" style="float:right;width:100px;"></h2><br>
-                    Undergraduate Student<br>
-                    Department of Computer Science and Engineering<br>
-                    <a href="http://www.sustech.edu.cn/en/">Southern University of Science and Technology</a><br>
-                    <br>
-                    Contact:<br>
-                    1088 Xueyuan Ave, Nanshan District<br>
-                    Shenzhen, Guangdong Province, China 518055<br>
-                    <br>
-                    Phone: (+86)13189779705
-                    Email: colinss.daniell530@gmail.com<br>
-                    <br>
-            
-         <!--   [<a href="CV.pdf">Curriculum Vitae</a>] -->
-          </td>
-          <td align="center" valign="top" style="padding-right:3em; padding-top:1em" >
-           
-          </td>
-        
-          <td align="center" valign="top" style="padding-left:16em; padding-top:0em; padding-bottom:1em">
-            <img  src="img/SUSTech Logo.png" alt="SUSTech Logo" style="width: 240; height: 130px;">
-            <img  src="img/profile2024.png" alt="Zihan YUAN" onmouseout="this.src='img/profile2024.png';" style="width: 216px; height: 262px;">
-          </td>
-      </tr>
-    </table>
 
-        <hr noshade size=4 color=#5EA85C>
+<div class="container">
+    <section class="hero-section">
+        <div class="profile-info">
+            <h1>Zihan Yuan</h1>
+            <div class="title-tag">Master of Computer Science @ Rice University</div>
+            <p style="color: var(--text-light); max-width: 500px; font-size: 1.1rem;">
+                Specializing in AI Agents and Full-Stack Systems.
+                Currently serving as Technical Partner & CTO @ MSTech, SZ, China.
+            </p>
 
-        <h2>Education</h2>
-        <p><strong>Southern University of Science and Technology</strong>, Shenzhen, China<br>
-           Department of Computer Science and Engineering<br>
-           B.E. in Computer Science and Technology, Sept 2021 - Sept 2025<br>
-           Overall GPA: 3.73/4.0</p>
+            <div class="contact-links">
+                <a href="mailto:colinss.daniell530@gmail.com">Email</a>
+                <a href="https://danielyuan123.github.io">GitHub</a>
+                <a href="tel:+13462320163">Phone</a>
+                <span style="color: var(--text-light); font-size: 0.9rem;">📍 Bellaire, TX</span>
+            </div>
+        </div>
 
-        <hr noshade size=4 color=#5EA85C>
+        <div class="profile-photo-container">
+            <img src="img/profile2026.jpg" alt="Zihan Yuan">
+        </div>
+    </section>
 
-        <h2>Research Interests</h2>
-        <ul>
-            <li>Software Engineering</li>
-            <li>Computer Security</li>
-        </ul>
-
-        <hr noshade size=4 color=#5EA85C>
-
-        <h2>Research Experience</h2>
-        <ul>
-            <li><strong>Undergraduate Research Assistant, Prof. Fengwei Zhang’s Research Group</strong> (April 2024 - Present)<br>
-                Project: Implement Device Isolation Based on Raspberry Pi and QEMU<br>
-                - Collaborated on research into the Confidential Compute Architecture (CCA) introduced in Armv9.2-A.<br>
-                - Implemented memory isolation techniques using Stage-2 page tables and Granule Protection Table (GPT) to enhance device resource protection.<br>
-                - Simulated Realm Management Monitor (RMM) functionalities using QEMU.</li>
-
-            <li><strong>Undergraduate Research Assistant, Prof. Hao Song’s Research Group</strong> (August 2023 - January 2024)<br>
-                Project: Evaluate GPT Performance in Traffic Flow and Trajectory Prediction<br>
-                - Evaluated GPT models in predicting traffic flow and vehicle trajectories.<br>
-                - Analyzed urban traffic datasets and developed innovative approaches to improve prediction accuracy.</li>
-        </ul>
-
-        <hr noshade size=4 color=#5EA85C>
-
-        <h2>Skills</h2>
-        <ul>
-            <li>Programming Languages: Java, C, C++, Python, Verilog HDL</li>
-            <li>Software Tools: MySQL</li>
-        </ul>
-
-        <hr noshade size=4 color=#5EA85C>
-
-        <h2>Honors & Awards</h2>
-        <ul>
-            <li><strong>Excellent Award, Shuwei Cup</strong> (2024)</li>
-            <li><strong>Outstanding Student Scholarship</strong>, Southern University of Science and Technology (2023)</li>
-            <li><strong>Outstanding Freshman Scholarship</strong>, Southern University of Science and Technology (2021)</li>
-        </ul>
-
-        <hr noshade size=4 color=#5EA85C>
-
-        <h2>Selected Projects</h2>
-        <ul class="paper">
-            <li>
-                <div class="s1">
-                    <scan class="title">Implement Device Isolation Based on Raspberry Pi and QEMU</scan><br>
-                    <scan class="author">Undergraduate Research Assistant under Prof. Fengwei Zhang</scan><br>
-                    - Focused on ARM v9.2-A architecture for confidentiality and integrity of user data.<br>
-                    - Developed secure methods for resource protection using Stage-2 page tables and simulated Realm Management Extensions.
-                </div>
-            </li>
-            <li>
-                <div class="s2">
-                    <scan class="title">Evaluate GPT Performance in Traffic Flow Prediction</scan><br>
-                    <scan class="author">Undergraduate Research Assistant under Prof. Hao Song</scan><br>
-                    - Investigated the application of GPT models to predict vehicle trajectories and traffic flow.<br>
-                    - Utilized machine learning techniques and time-series data to improve accuracy.
-                </div>
-            </li>
-        </ul>
-
-        <hr noshade size=4 color=#5EA85C>
-
-        <h2>Contact Information</h2>
-        <p>Feel free to reach out to me via email: <strong>colinss.daniell530@gmail.com</strong></p>
+    <div class="logo-bar">
+        <img src="img/RiceUStackedVertical_BLUE.jpg" alt="Rice University" title="Rice University">
+        <img src="img/mstech_logo.svg" alt="MSTech" title="MSTech">
+        <img src="img/SUSTech Logo.png" alt="SUSTech" title="Southern University of Science and Technology">
     </div>
+
+    <main class="main-content">
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span>Rice University</span>
+                    <span class="date">Jan 2026 - Dec 2027</span>
+                </div>
+                <div class="item-sub">Master of Computer Science (MCS) | Houston, TX</div>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span>Southern University of Science and Technology</span>
+                    <span class="date">Aug 2021 - July 2025</span>
+                </div>
+                <div class="item-sub">Bachelor of Science in Computer Science | GPA: 3.73/4.00 (Top 10%)</div>
+            </div>
+        </section>
+
+
+        <section id="experience">
+            <h2>Professional Experience</h2>
+
+            <div class="item">
+                <div class="item-header">
+                    <span>MSTech (mstech.ai)</span>
+                    <span class="date">Nov 2025 - Present</span>
+                </div>
+                <div class="item-sub">Technical Partner & CTO</div>
+                <ul>
+                    <li><b>Strategic Partnership & Market Expansion:</b> Spearheaded the technical due diligence and infrastructure validation that led MSTech to become the <b>first Professional Services Partner (PSP)</b> for Posit Software, PBC (formerly RStudio) in the Asia-Pacific region.</li>
+                    <li><b>Enterprise Cloud Deployment:</b> Directed the localized deployment of high-performance data science clusters for <b>Qilu Pharmaceutical</b>. Resolved complex private network debugging and domestic cloud compatibility issues, directly enabling the acquisition of a <b>¥3.0M+ (RMB)</b> contract.</li>
+                    <li><b>Identity & DevOps Orchestration:</b> Architected a robust enterprise Identity Provider (IDP) ecosystem using <b>Keycloak</b>, achieving seamless Single Sign-On (SSO) integration across critical platforms including Nextcloud, Zammad, and Discourse.</li>
+                    <li><b>SDLC Modernization:</b> Implemented a self-hosted <b>GitLab CI/CD</b> runner environment, automating containerized workflows and reducing code-to-production latency by optimizing build pipelines.</li>
+                </ul>
+                <div style="margin-left: 20px;">
+                    <span class="tag">Keycloak</span> <span class="tag">Posit/RStudio</span> <span class="tag">GitLab CI/CD</span> <span class="tag">Docker</span> <span class="tag">Enterprise Infrastructure</span>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <span>Parse-health (parse-health.org)</span>
+                    <span class="date">July 2025 - Present</span>
+                </div>
+                <div class="item-sub">AI Agent Developer</div>
+                <ul>
+                    <li><b>Intelligent Medical Research Agents:</b> Engineered a sophisticated <b>Retrieval-Augmented Generation (RAG)</b> system using <b>LangGraph</b> and React, enabling medical students to query and navigate the Unified Medical Language System (UMLS) with high semantic accuracy.</li>
+                    <li><b>Large-scale Data Analysis:</b> Appointed to lead the development of the <b>WHI Agent</b>, a high-scale AI platform specifically designed to analyze 40+ years of longitudinal data from the <b>Women’s Health Initiative</b>, focusing on trend extraction and clinical insight generation.</li>
+                    <li><b>Critical Project Recovery:</b> Rescued and refactored a legacy Medical Knowledge Graph project that had been stalled for over 12 months. Successfully delivered the production-ready system within <b>30 days</b> of appointment, restoring client trust and project momentum.</li>
+                </ul>
+                <div style="margin-left: 20px;">
+                    <span class="tag">LangGraph</span> <span class="tag">RAG</span> <span class="tag">UMLS</span> <span class="tag">React</span> <span class="tag">Vector Databases</span> <span class="tag">Knowledge Graphs</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="research">
+            <h2>Academic Research</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span>ARM v9.2-A Device Isolation Research</span>
+                    <span class="date">Apr 2024 - Present</span>
+                </div>
+                <div class="item-sub">Undergraduate RA @ Prof. Fengwei Zhang’s Lab</div>
+                <ul>
+                    <li>Investigated the <b>Confidential Compute Architecture (CCA)</b> and Realm Management Extension (RME) in ARM v9.2-A.</li>
+                    <li>Developed secure resource isolation mechanisms using <b>Stage-2 page tables</b> and Granule Protection Tables (GPT) on Raspberry Pi and QEMU environments to enhance hardware-level security.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Stack & Expertise</h2>
+            <div class="item">
+                <p><strong>Languages:</strong> Python (Data Science/AI), TypeScript (Frontend/Node), Java (Enterprise), C++ (Systems), SQL.</p>
+                <p><strong>AI & Data:</strong> LangGraph, RAG, UMLS, Vector Databases (Chroma/Pinecone), Knowledge Graphs.</p>
+                <p><strong>Infrastructure:</strong> Kubernetes, Docker, GitLab CI/CD, Keycloak IDP, Linux Server Management.</p>
+                <p><strong>Frameworks:</strong> React, Vue 3, Spring Boot, Flask, Node.js.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Zihan Yuan | Built with passion in Houston, TX</p>
+    </footer>
+</div>
+
 </body>
 </html>
