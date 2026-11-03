@@ -3,302 +3,906 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zihan Yuan | Rice University & MSTech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Zihan Yuan — Computer Science</title>
+    <meta name="description" content="Zihan Yuan builds clinical research agents and the infrastructure that runs them. Rice University MCS.">
+    <meta property="og:title" content="Zihan Yuan — Computer Science">
+    <meta property="og:description" content="Clinical research agents, knowledge graphs, and the Kubernetes, identity, and observability stack around them.">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://danielyuan123.github.io/">
+    <meta property="og:image" content="https://danielyuan123.github.io/img/profile.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.17/dist/lenis.css">
     <style>
         :root {
-            --primary-color: #00205B; /* Rice Blue */
-            --accent-color: #5EA85C;
-            --text-main: #2d3436;
-            --text-light: #636e72;
-            --bg-body: #f4f7f9;
+            --bg: #071018;
+            --panel: #101924;
+            --line: #24344a;
+            --text: #e7eef8;
+            --muted: #8ea0b8;
+            --signal: #3ddcff;
+            --signal-dim: rgba(61, 220, 255, 0.14);
+            --sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+            --display: "Sora", "IBM Plex Sans", sans-serif;
+            --mono: "IBM Plex Mono", ui-monospace, monospace;
         }
 
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: auto; }
+
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            line-height: 1.6;
-            color: var(--text-main);
-            background-color: var(--bg-body);
             margin: 0;
-            padding: 0;
-            position: relative;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 16.5px;
+            line-height: 1.6;
         }
 
         body::before {
             content: "";
             position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(61, 220, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(61, 220, 255, 0.035) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+        }
+
+        .skip {
+            position: absolute;
+            left: 12px;
+            top: -40px;
+            background: var(--signal);
+            color: #041018;
+            padding: 8px 12px;
+            z-index: 20;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+        }
+
+        .skip:focus { top: 12px; }
+
+        a { color: inherit; }
+
+        .shell {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .topbar {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            /* 科技感网格纹理 */
-            background-image:
-                    radial-gradient(circle at 2px 2px, rgba(0, 32, 91, 0.05) 1px, transparent 0),
-                    linear-gradient(rgba(0, 32, 91, 0.02) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0, 32, 91, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px, 20px 20px, 20px 20px;
-            background-attachment: fixed;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
-            padding: 0;
-            box-shadow: 0 20px 50px rgba(0,32,91,0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-
-        /* --- Header Section --- */
-        .hero-section {
-            padding: 60px 60px 30px 60px;
+            z-index: 10;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .profile-info { flex: 1; }
-        .profile-info h1 {
-            font-size: 3.2rem;
-            margin: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-        }
-
-        .title-tag {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            margin: 10px 0;
-        }
-
-        .contact-links {
-            margin-top: 20px;
-        }
-
-        .contact-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-right: 20px;
-            font-size: 0.95rem;
-            border-bottom: 1px solid #ddd;
-            transition: 0.3s;
-        }
-
-        .contact-links a:hover { color: var(--primary-color); border-color: var(--primary-color); }
-
-        .profile-photo-container img {
-            width: 200px;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* --- Logo Bar (The "Trust Bar") --- */
-        .logo-bar {
-            background: #fcfdfe;
-            border-top: 1px solid #f0f0f0;
-            border-bottom: 1px solid #f0f0f0;
-            padding: 30px 30px;
-            display: flex;
-            justify-content: space-around;
             align-items: center;
-            gap: 30px;
+            gap: 22px;
+            margin: 0 -16px;
+            padding: 14px 16px;
+            background: rgba(7, 16, 24, 0.86);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(36, 52, 74, 0.9);
         }
 
-        .logo-bar img {
-            height: 70px;
-            width: auto;
-            max-width: 180px;
-            transition: all 0.4s ease;
+        .mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--signal);
+            color: var(--signal);
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            flex: none;
         }
 
-        .logo-bar img:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.05);
+        .top-name {
+            font-family: var(--display);
+            font-weight: 600;
+            letter-spacing: -0.03em;
         }
 
-        /* --- Main Content Area --- */
-        .main-content {
-            padding: 20px 60px 60px 60px;
+        .topbar nav {
+            display: flex;
+            gap: 18px;
+            margin-left: auto;
         }
+
+        .topbar nav a {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--muted);
+            padding: 6px 0;
+        }
+
+        .topbar nav a:hover,
+        .topbar nav a[aria-current="true"] { color: var(--signal); }
+
+        .pdf {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #041018;
+            background: var(--signal);
+            padding: 8px 12px;
+            flex: none;
+        }
+
+        .pdf:hover { background: #8aefff; }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 148px minmax(0, 1fr);
+            gap: 32px;
+            align-items: center;
+            padding: 48px 0 28px;
+        }
+
+        .portrait {
+            width: 148px;
+            height: 176px;
+            object-fit: cover;
+            object-position: center 20%;
+            border: 1px solid var(--signal);
+            background: #fff;
+            display: block;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--signal);
+        }
+
+        .live {
+            position: relative;
+            width: 8px;
+            height: 8px;
+            flex: none;
+        }
+
+        .live .dot,
+        .live .ping {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+        }
+
+        .live .dot {
+            background: var(--signal);
+            box-shadow: 0 0 10px var(--signal);
+        }
+
+        .live .ping { border: 1px solid var(--signal); }
+
+        h1 {
+            margin: 10px 0 0;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            letter-spacing: -0.055em;
+            line-height: 0.92;
+        }
+
+        .lede {
+            margin: 16px 0 0;
+            max-width: 40rem;
+            font-size: 1.2rem;
+            line-height: 1.45;
+            color: #c5d2e4;
+            text-wrap: pretty;
+        }
+
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            list-style: none;
+            margin: 18px 0 0;
+            padding: 0;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+        }
+
+        .contact a {
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contact a:hover { color: var(--text); border-bottom-color: var(--signal); }
+
+        .contact .plain { color: var(--muted); }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            list-style: none;
+            margin: 18px 0 0;
+            padding: 0;
+        }
+
+        .chips li {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            background: var(--signal-dim);
+            border: 1px solid rgba(61, 220, 255, 0.28);
+            padding: 5px 9px;
+        }
+
+        .spec {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            border: 1px solid var(--line);
+            background: rgba(16, 25, 36, 0.8);
+            margin-bottom: 12px;
+        }
+
+        .spec div {
+            padding: 16px 18px;
+            display: grid;
+            gap: 2px;
+        }
+
+        .spec div + div { border-left: 1px solid var(--line); }
+
+        .spec span,
+        .meta,
+        h2,
+        .host,
+        .degree,
+        .block-note,
+        footer {
+            font-family: var(--mono);
+        }
+
+        .spec span {
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--signal);
+        }
+
+        .spec strong {
+            font-family: var(--display);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            font-size: 1.05rem;
+        }
+
+        .spec em {
+            font-style: normal;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        section { margin-top: 36px; scroll-margin-top: 78px; }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-top: 50px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            margin: 0 0 14px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--muted);
         }
 
-        h2::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #eee;
+        .card {
+            background: rgba(16, 25, 36, 0.92);
+            border: 1px solid var(--line);
+            padding: 20px 22px;
         }
 
-        .item { margin-bottom: 35px; }
-        .item-header { display: flex; justify-content: space-between; font-weight: 700; color: #111; }
-        .date { color: var(--text-light); font-weight: 400; font-size: 0.9rem; }
-        .item-sub { color: var(--accent-color); font-weight: 600; margin-bottom: 5px; }
+        .entry + .entry,
+        .spans { margin-top: 0; }
 
-        .tag {
-            display: inline-block;
-            background: #f0f4f8;
-            color: #445;
-            padding: 5px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin: 5px 5px 0 0;
+        .entry + .entry { margin-top: 12px; }
+
+        .entry-head,
+        .span-head,
+        .block-head {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 8px 20px;
+            align-items: baseline;
+        }
+
+        h3, h4 {
+            margin: 0;
+            font-family: var(--display);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        h3 { font-size: 1.28rem; }
+        h4 { font-size: 1rem; }
+
+        .degree,
+        .block-note,
+        .meta { color: var(--muted); }
+
+        .degree, .block-note { margin: 3px 0 0; }
+
+        .org-role {
+            margin: 4px 0 0;
+            color: var(--signal);
             font-weight: 500;
         }
 
-        footer {
-            background: #2d3436;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            font-size: 0.9rem;
+        .meta {
+            margin: 0;
+            text-align: right;
+            font-size: 0.75rem;
+            line-height: 1.45;
         }
 
-        @media (max-width: 768px) {
-            .hero-section { flex-direction: column-reverse; padding: 40px 30px; text-align: center; }
-            .profile-photo-container { margin: 0 auto 30px auto; }
-            .logo-bar { flex-direction: column; padding: 40px 20px; }
-            .main-content { padding: 20px 30px; }
-            .profile-info h1 { font-size: 2.5rem; }
+        .host {
+            margin-left: 8px;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0;
+            color: var(--muted);
+        }
+
+        .spans {
+            position: relative;
+            display: grid;
+            gap: 14px;
+            padding-left: 28px;
+        }
+
+        .rail {
+            position: absolute;
+            left: 6px;
+            top: 14px;
+            bottom: 14px;
+            width: 1px;
+            background: linear-gradient(var(--signal), rgba(61, 220, 255, 0.05));
+            transform: scaleY(0);
+            transform-origin: top center;
+            box-shadow: 0 0 12px rgba(61, 220, 255, 0.55);
+        }
+
+        .span { position: relative; }
+
+        .span::before {
+            content: "";
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--signal);
+            left: -26px;
+            top: 26px;
+            box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--signal);
+        }
+
+        .block { margin-top: 16px; }
+
+        ul.points {
+            margin: 10px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 8px;
+        }
+
+        ul.points li {
+            position: relative;
+            padding-left: 14px;
+            text-wrap: pretty;
+            color: #d5dfec;
+        }
+
+        ul.points li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.7em;
+            width: 6px;
+            height: 1px;
+            background: var(--signal);
+        }
+
+        .sheet { margin: 0; }
+
+        .sheet div {
+            display: grid;
+            grid-template-columns: 148px minmax(0, 1fr);
+            gap: 16px;
+            padding: 12px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .sheet dt {
+            margin: 0;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--signal);
+            padding-top: 3px;
+        }
+
+        .sheet dd { margin: 0; color: #d5dfec; }
+
+        footer {
+            margin: 42px 0 56px;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--signal);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 800px) {
+            .top-name { display: none; }
+            .topbar { gap: 12px; flex-wrap: wrap; }
+            .topbar nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; }
+            .hero { grid-template-columns: 1fr; gap: 18px; padding-top: 28px; }
+            .portrait { width: 104px; height: 124px; }
+            .spec { grid-template-columns: 1fr; }
+            .spec div + div { border-left: 0; border-top: 1px solid var(--line); }
+            .entry-head, .span-head, .block-head, .sheet div { grid-template-columns: 1fr; }
+            .meta { text-align: left; }
+            h1 { font-size: 2.6rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rail { transform: none; }
+        }
+
+        @media print {
+            body { background: #fff; color: #111; }
+            body::before, .topbar nav, .live, .rail, .chips { display: none; }
+            .topbar { position: static; background: #fff; }
+            .card, .spec { border-color: #ccc; background: #fff; }
+            a { text-decoration: none; }
         }
     </style>
 </head>
 <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="shell">
+        <header class="topbar">
+            <a class="mark" href="#content">ZY</a>
+            <span class="top-name">Zihan Yuan</span>
+            <nav aria-label="Sections">
+                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+            </nav>
+            <a class="pdf" href="Zihan_Yuan_Resume.pdf">Resume PDF</a>
+        </header>
 
-<div class="container">
-    <section class="hero-section">
-        <div class="profile-info">
-            <h1>Zihan Yuan</h1>
-            <div class="title-tag">Master of Computer Science @ Rice University</div>
-            <p style="color: var(--text-light); max-width: 500px; font-size: 1.1rem;">
-                Specializing in AI Agents and Full-Stack Systems.
-                Currently serving as Technical Partner & CTO @ MSTech, SZ, China.
-            </p>
+        <main id="content">
+            <section class="hero">
+                <img class="portrait" src="img/profile.jpg" alt="Portrait of Zihan Yuan">
+                <div class="hero-copy">
+                    <p class="status"><span class="live" aria-hidden="true"><i class="ping"></i><i class="dot"></i></span> Systems · Bellaire, Texas</p>
+                    <h1>Zihan Yuan</h1>
+                    <p class="lede">Clinical research agents that keep their traces, and the Kubernetes, identity, and observability stack that runs them.</p>
+                    <ul class="contact">
+                        <li><a href="mailto:colinss.daniell530@gmail.com">colinss.daniell530@gmail.com</a></li>
+                        <li><a href="tel:+13462320163">+1 (346) 232-0163</a></li>
+                        <li><span class="plain">Bellaire, Texas</span></li>
+                        <li><a href="https://github.com/DanielYuan123">github.com/DanielYuan123</a></li>
+                    </ul>
+                    <ul class="chips" aria-label="Focus areas">
+                        <li>LangGraph</li>
+                        <li>React</li>
+                        <li>Vue 3</li>
+                        <li>Kubernetes</li>
+                        <li>OpenTelemetry</li>
+                        <li>Keycloak</li>
+                    </ul>
+                </div>
+            </section>
 
-            <div class="contact-links">
-                <a href="mailto:colinss.daniell530@gmail.com">Email</a>
-                <a href="https://danielyuan123.github.io">GitHub</a>
-                <a href="tel:+13462320163">Phone</a>
-                <span style="color: var(--text-light); font-size: 0.9rem;">📍 Bellaire, TX</span>
+            <div class="spec" aria-label="Current focus">
+                <div><span>Now</span><strong>Rice MCS</strong><em>Houston · Jan 2026 – Dec 2027</em></div>
+                <div><span>Build</span><strong>Clinical agents</strong><em>Parse Health · DBT-MATE</em></div>
+                <div><span>Infra</span><strong>MSTech CTO</strong><em>First Posit PSP in Asia-Pacific</em></div>
             </div>
-        </div>
 
-        <div class="profile-photo-container">
-            <img src="img/profile2026.jpg" alt="Zihan Yuan">
-        </div>
-    </section>
+            <section id="education">
+                <h2>Education</h2>
+                <article class="entry card">
+                    <div class="entry-head">
+                        <div>
+                            <h3>Rice University</h3>
+                            <p class="degree">Master of Computer Science</p>
+                        </div>
+                        <p class="meta">Houston, Texas<br>Jan 2026 – Dec 2027</p>
+                    </div>
+                </article>
+                <article class="entry card">
+                    <div class="entry-head">
+                        <div>
+                            <h3>Southern University of Science and Technology</h3>
+                            <p class="degree">Bachelor of Science in Computer Science · GPA 3.73/4.00 (90%)</p>
+                        </div>
+                        <p class="meta">Shenzhen, China<br>Aug 2021 – Jul 2025</p>
+                    </div>
+                </article>
+            </section>
 
-    <div class="logo-bar">
-        <img src="img/RiceUStackedVertical_BLUE.jpg" alt="Rice University" title="Rice University">
-        <img src="img/mstech_logo.svg" alt="MSTech" title="MSTech">
-        <img src="img/SUSTech Logo.png" alt="SUSTech" title="Southern University of Science and Technology">
+            <section id="experience">
+                <h2>Experience</h2>
+                <div class="spans">
+                    <div class="rail" aria-hidden="true"></div>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>Parse Health <span class="host">parse-health.org</span></h3>
+                                    <p class="org-role">Full-Stack Engineer</p>
+                                </div>
+                                <p class="meta">Jul 2025 – Present</p>
+                            </header>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>UMLS / Ontology Agent</h4>
+                                    <p class="meta">Jul 2025 – Present</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Took over a stalled medical knowledge-graph effort and rebuilt the core data path into a LangGraph RAG agent that writes SQL and helps researchers navigate UMLS terminology.</li>
+                                    <li>Built the React research workspace: SSE streaming chat, bilingual structured replies for SQL, concept clarification, hierarchy, and sourced knowledge, plus per-turn run traces that stay inspectable after refresh.</li>
+                                    <li>Added CSV cohort upload with column filters, distributions, batch CUI lookup, and hierarchy-union tables, plus shareable read-only sessions with file preview and download, voice input, and a registration flow that collects a UMLS API key.</li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>WHI Agent</h4>
+                                    <p class="meta">Cross-cohort harmonization</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Built variable retrieval for the Women’s Health Initiative and MESA (dbGaP). PubMedBERT and SapBERT find candidate variables, and a covariate-adjusted ranker blends semantic similarity with distribution-tail distance across 14 study accessions.</li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>KAGE — Hematology Knowledge Graph Explorer</h4>
+                                    <p class="meta">Aug 2025 – Present</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Replaced the WebGL view (3d-force-graph / Three.js) with a custom Canvas 2D renderer. A d3-force-3d layout is projected through a perspective camera, and same-category concepts cluster into islands so PheCode, RxNorm, LOINC, and UMLS networks stay readable while orbiting and hovering.</li>
+                                    <li>Adapted the Vue 3 frontend to the Spring Boot KAGE API and fixed search, legend, and layout bugs.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>MSTech <span class="host">mstech.ai</span></h3>
+                                    <p class="org-role">Technical Partner &amp; CTO</p>
+                                </div>
+                                <p class="meta">Aug 2025 – Present</p>
+                            </header>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>Strategic partnership with Posit Software</h4>
+                                    <p class="meta">Nov 2025 – Present</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Led technical validation, deployment strategy, and customer communication for Posit’s enterprise analytics products, helping the firm become the first Professional Services Partner in Asia-Pacific and China’s only Premier Partner.</li>
+                                    <li>Completed the Posit Bootcamp and the Partnership Technical Engineer Assessment. Customer delivery sits under this partnership: Qilu Pharmaceutical, Beihai Pharmaceutical, and NCS Singapore.</li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>Qilu Pharmaceutical — Posit platform and GxP</h4>
+                                    <p class="meta">2025 – Present</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Primary technical counterpart for Posit Workbench, Connect, and Package Manager on the customer’s private-cloud Kubernetes cluster: 7 nodes, about 20 Workbench users and 100 Connect users.</li>
+                                    <li>Worked through private-network and storage limits with aSAN block storage and an NFS provisioner for dynamic volumes, and fixed LDAP/AD to Unix identity mapping.</li>
+                                    <li>Built the OpenTelemetry path — Collector, Prometheus, Grafana, Loki, and Jaeger — and a Velero backup and restore design.</li>
+                                    <li>Supported GxP validation through IQ/OQ/PQ documents, tests, and defect feedback. The engagement has reached PQ. Also stood up Zammad for tickets and a user training site.</li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>Beihai Pharmaceutical — platform evaluation</h4>
+                                    <p class="meta">Client session</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Demonstrated the Posit platform, walked through architecture and deployment constraints, and helped the customer settle the next evaluation steps.</li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>NCS Singapore — Workbench on SageMaker</h4>
+                                    <p class="meta">License recovery</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Investigated Posit Workbench becoming unavailable on Amazon SageMaker after the license expired, agreed a recovery path, and coordinated the technical guidance that brought the platform back.</li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <div class="block-head">
+                                    <h4>Unified enterprise IT &amp; DevOps</h4>
+                                    <p class="meta">Aug 2025 – Jan 2026</p>
+                                </div>
+                                <ul class="points">
+                                    <li>Deployed Dockerized Keycloak with OIDC across nine internal platforms, including Nextcloud, Zammad, and Discourse, cutting employee onboarding time by 87%.</li>
+                                    <li>Built CI/CD with Coolify and self-hosted GitLab Runners so application builds and deployments run without a manual release step.</li>
+                                    <li>Extended Kimai with twelve plugins for timesheets, leave and holiday approvals, SOP document control, personnel compliance, and task review, all behind Keycloak single sign-on.</li>
+                                    <li>Added LLM summaries on live timesheet data, delivered on a schedule as daily, weekly, and project reports, so leadership can see utilization without collecting status by hand.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="spans">
+                    <div class="rail" aria-hidden="true"></div>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>DBT-MATE</h3>
+                                    <p class="org-role">Full-Stack Engineer · Peking University Sixth Hospital RCT</p>
+                                </div>
+                                <p class="meta">Sep 2026 – Present</p>
+                            </header>
+                            <ul class="points">
+                                <li>WeChat mini program for a randomized trial of DBT skills with university students: screening, e-consent, weekly modules, mood check-ins, skill homework, and a researcher console. The protocol plans to enroll about 600 eligible students.</li>
+                                <li>Continued the app in Taro, React, and TypeScript, and rebuilt login and product APIs in Spring Boot: WeChat login, questionnaires and study arms, video and skill cards, achievement coins, with media on MinIO. Developer accounts stay separate from participant data.</li>
+                                <li>The DBT coach is a LangGraph flow — safety classification, dialogue policy, retrieval, coaching, critique, and a final check — streamed into the mini program, with thread sharing and reply ratings.</li>
+                                <li>GitHub Actions on a self-hosted runner builds images for Coolify staging and production. Images publish to Tencent Cloud Container Registry and registry.dbtmate.cn.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>SDS4A</h3>
+                                    <p class="org-role">Full-Stack Engineer · Official site</p>
+                                </div>
+                                <p class="meta">Nov 2025 – Dec 2025</p>
+                            </header>
+                            <ul class="points">
+                                <li>Led a Next.js site and static publishing platform, with self-hosted Logto for sign-in, user management, and roles.</li>
+                                <li>GitLab CI/CD publishes to GitLab Pages. The recorded Lighthouse score is 98, and the site was built to hold more than 100 concurrent visitors.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>AI Doctor</h3>
+                                    <p class="org-role">AI Agent &amp; Full-Stack Engineer</p>
+                                </div>
+                                <p class="meta">Aug 2025 – Oct 2025</p>
+                            </header>
+                            <ul class="points">
+                                <li>Built an interactive digital-physician app in React against a LangGraph orchestration backend for structured consultations and agent-driven diagnostic guidance.</li>
+                                <li>Designed multi-agent RAG, prompt orchestration, and tool calls for symptom triage and clinical Q&amp;A across longitudinal patient inputs.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>DaniOJ</h3>
+                                    <p class="org-role">Full-Stack Engineer · Online judge</p>
+                                </div>
+                                <p class="meta">Aug 2024 – Mar 2025</p>
+                            </header>
+                            <ul class="points">
+                                <li>Built a practice, judging, and discussion platform with Spring Boot and Vue 3.</li>
+                                <li>Ran submissions in an isolated Docker sandbox via docker-java, and used Intel SGX to protect submitted code and execution results.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="span">
+                        <div class="card">
+                            <header class="span-head">
+                                <div>
+                                    <h3>AquaGuard</h3>
+                                    <p class="org-role">Primary Author &amp; Front-end Engineer · VAST Challenge 2024</p>
+                                </div>
+                                <p class="meta">Nov 2023 – Jun 2024</p>
+                            </header>
+                            <ul class="points">
+                                <li>Designed AquaGuard for investigating illegal fishing in large maritime datasets: vessel filtering, side-by-side comparison, anomaly review, and drill-down.</li>
+                                <li>Built a multi-view frontend with D3.js, Vue 3, and ECharts, linking knowledge graphs, temporal diagrams, heatmaps, vessel trajectories, and hierarchical trees.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>Skills</h2>
+                <dl class="sheet card">
+                    <div>
+                        <dt>Languages</dt>
+                        <dd>Python, Java, C++, TypeScript, JavaScript, SQL</dd>
+                    </div>
+                    <div>
+                        <dt>AI &amp; data</dt>
+                        <dd>LangGraph, RAG, multi-agent systems, PubMedBERT, SapBERT, data harmonization</dd>
+                    </div>
+                    <div>
+                        <dt>Backend</dt>
+                        <dd>Flask, Spring Boot, Node.js, REST APIs, OAuth2, JWT</dd>
+                    </div>
+                    <div>
+                        <dt>Frontend</dt>
+                        <dd>React, Vue 3, Taro, HTML/CSS, D3.js, ECharts, Canvas 2D</dd>
+                    </div>
+                    <div>
+                        <dt>Databases</dt>
+                        <dd>MySQL, PostgreSQL, MongoDB, Redis, SQLite, MinIO</dd>
+                    </div>
+                    <div>
+                        <dt>Cloud &amp; DevOps</dt>
+                        <dd>AWS, Kubernetes, Docker, Linux, Git, GitLab CI/CD, GitHub Actions, Coolify, Nginx, Caddy, OpenTelemetry, Prometheus, Grafana, Loki, Jaeger, Velero, Keycloak, Logto, Intel SGX</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <footer>Zihan Yuan · Bellaire, Texas</footer>
+        </main>
     </div>
 
-    <main class="main-content">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.17/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@4.2.2/dist/bundles/anime.umd.min.js"></script>
+    <script type="module">
+        import { animate as motionAnimate, hover } from "https://cdn.jsdelivr.net/npm/motion@12.23.24/+esm";
 
-        <section id="education">
-            <h2>Education</h2>
-            <div class="item">
-                <div class="item-header">
-                    <span>Rice University</span>
-                    <span class="date">Jan 2026 - Dec 2027</span>
-                </div>
-                <div class="item-sub">Master of Computer Science (MCS) | Houston, TX</div>
-            </div>
-            <div class="item">
-                <div class="item-header">
-                    <span>Southern University of Science and Technology</span>
-                    <span class="date">Aug 2021 - July 2025</span>
-                </div>
-                <div class="item-sub">Bachelor of Science in Computer Science | GPA: 3.73/4.00 (Top 10%)</div>
-            </div>
-        </section>
+        const links = [...document.querySelectorAll(".topbar nav a")];
+        const sections = links.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+        const setCurrent = (id) => {
+            links.forEach((link) => {
+                if (link.getAttribute("href") === "#" + id) link.setAttribute("aria-current", "true");
+                else link.removeAttribute("aria-current");
+            });
+        };
 
-        <section id="experience">
-            <h2>Professional Experience</h2>
+        const updateCurrent = () => {
+            const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+            if (atBottom) {
+                setCurrent(sections[sections.length - 1].id);
+                return;
+            }
+            const line = 110;
+            let current = sections[0];
+            sections.forEach((section) => {
+                if (section.getBoundingClientRect().top <= line) current = section;
+            });
+            if (current) setCurrent(current.id);
+        };
 
-            <div class="item">
-                <div class="item-header">
-                    <span>MSTech (mstech.ai)</span>
-                    <span class="date">Nov 2025 - Present</span>
-                </div>
-                <div class="item-sub">Technical Partner & CTO</div>
-                <ul>
-                    <li><b>Strategic Partnership & Market Expansion:</b> Spearheaded the technical due diligence and infrastructure validation that led MSTech to become the <b>first Professional Services Partner (PSP)</b> for Posit Software, PBC (formerly RStudio) in the Asia-Pacific region.</li>
-                    <li><b>Enterprise Cloud Deployment:</b> Directed the localized deployment of high-performance data science clusters for <b>Qilu Pharmaceutical</b>. Resolved complex private network debugging and domestic cloud compatibility issues, directly enabling the acquisition of a <b>¥3.0M+ (RMB)</b> contract.</li>
-                    <li><b>Identity & DevOps Orchestration:</b> Architected a robust enterprise Identity Provider (IDP) ecosystem using <b>Keycloak</b>, achieving seamless Single Sign-On (SSO) integration across critical platforms including Nextcloud, Zammad, and Discourse.</li>
-                    <li><b>SDLC Modernization:</b> Implemented a self-hosted <b>GitLab CI/CD</b> runner environment, automating containerized workflows and reducing code-to-production latency by optimizing build pipelines.</li>
-                </ul>
-                <div style="margin-left: 20px;">
-                    <span class="tag">Keycloak</span> <span class="tag">Posit/RStudio</span> <span class="tag">GitLab CI/CD</span> <span class="tag">Docker</span> <span class="tag">Enterprise Infrastructure</span>
-                </div>
-            </div>
+        updateCurrent();
 
-            <div class="item">
-                <div class="item-header">
-                    <span>Parse-health (parse-health.org)</span>
-                    <span class="date">July 2025 - Present</span>
-                </div>
-                <div class="item-sub">AI Agent Developer</div>
-                <ul>
-                    <li><b>Intelligent Medical Research Agents:</b> Engineered a sophisticated <b>Retrieval-Augmented Generation (RAG)</b> system using <b>LangGraph</b> and React, enabling medical students to query and navigate the Unified Medical Language System (UMLS) with high semantic accuracy.</li>
-                    <li><b>Large-scale Data Analysis:</b> Appointed to lead the development of the <b>WHI Agent</b>, a high-scale AI platform specifically designed to analyze 40+ years of longitudinal data from the <b>Women’s Health Initiative</b>, focusing on trend extraction and clinical insight generation.</li>
-                    <li><b>Critical Project Recovery:</b> Rescued and refactored a legacy Medical Knowledge Graph project that had been stalled for over 12 months. Successfully delivered the production-ready system within <b>30 days</b> of appointment, restoring client trust and project momentum.</li>
-                </ul>
-                <div style="margin-left: 20px;">
-                    <span class="tag">LangGraph</span> <span class="tag">RAG</span> <span class="tag">UMLS</span> <span class="tag">React</span> <span class="tag">Vector Databases</span> <span class="tag">Knowledge Graphs</span>
-                </div>
-            </div>
-        </section>
+        if (reduce) {
+            document.addEventListener("scroll", updateCurrent, { passive: true });
+        } else {
+            gsap.registerPlugin(ScrollTrigger);
 
-        <section id="research">
-            <h2>Academic Research</h2>
-            <div class="item">
-                <div class="item-header">
-                    <span>ARM v9.2-A Device Isolation Research</span>
-                    <span class="date">Apr 2024 - Present</span>
-                </div>
-                <div class="item-sub">Undergraduate RA @ Prof. Fengwei Zhang’s Lab</div>
-                <ul>
-                    <li>Investigated the <b>Confidential Compute Architecture (CCA)</b> and Realm Management Extension (RME) in ARM v9.2-A.</li>
-                    <li>Developed secure resource isolation mechanisms using <b>Stage-2 page tables</b> and Granule Protection Tables (GPT) on Raspberry Pi and QEMU environments to enhance hardware-level security.</li>
-                </ul>
-            </div>
-        </section>
+            const lenis = new Lenis({ duration: 1.05, smoothWheel: true });
+            lenis.on("scroll", () => {
+                ScrollTrigger.update();
+                updateCurrent();
+            });
+            gsap.ticker.add((time) => lenis.raf(time * 1000));
+            gsap.ticker.lagSmoothing(0);
 
-        <section id="skills">
-            <h2>Technical Stack & Expertise</h2>
-            <div class="item">
-                <p><strong>Languages:</strong> Python (Data Science/AI), TypeScript (Frontend/Node), Java (Enterprise), C++ (Systems), SQL.</p>
-                <p><strong>AI & Data:</strong> LangGraph, RAG, UMLS, Vector Databases (Chroma/Pinecone), Knowledge Graphs.</p>
-                <p><strong>Infrastructure:</strong> Kubernetes, Docker, GitLab CI/CD, Keycloak IDP, Linux Server Management.</p>
-                <p><strong>Frameworks:</strong> React, Vue 3, Spring Boot, Flask, Node.js.</p>
-            </div>
-        </section>
-    </main>
+            document.querySelectorAll('a[href^="#"]').forEach((link) => {
+                link.addEventListener("click", (event) => {
+                    const target = document.querySelector(link.getAttribute("href"));
+                    if (!target) return;
+                    event.preventDefault();
+                    lenis.scrollTo(target, { offset: -78 });
+                });
+            });
 
-    <footer>
-        <p>&copy; 2026 Zihan Yuan | Built with passion in Houston, TX</p>
-    </footer>
-</div>
+            gsap.timeline({ defaults: { ease: "power3.out" } })
+                .from(".topbar", { y: -18, autoAlpha: 0, duration: 0.45 })
+                .from(".portrait", { y: 16, autoAlpha: 0, duration: 0.55 }, 0.08)
+                .from(".hero-copy > *", { y: 18, autoAlpha: 0, stagger: 0.07, duration: 0.5 }, 0.12)
+                .from(".spec div", { y: 16, autoAlpha: 0, stagger: 0.08, duration: 0.45 }, 0.28);
 
+            gsap.utils.toArray(".rail").forEach((rail) => {
+                gsap.to(rail, {
+                    scaleY: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: rail.parentElement,
+                        start: "top 75%",
+                        end: "bottom 65%",
+                        scrub: true
+                    }
+                });
+            });
+
+            gsap.utils.toArray(".card").forEach((card) => {
+                gsap.from(card, {
+                    y: 26,
+                    autoAlpha: 0,
+                    duration: 0.65,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    },
+                    onComplete() { gsap.set(card, { clearProps: "transform" }); }
+                });
+            });
+
+            anime.animate(".ping", {
+                scale: [1, 2.4],
+                opacity: [0.75, 0],
+                duration: 1500,
+                loop: true,
+                ease: "outQuad"
+            });
+
+            ScrollTrigger.create({
+                trigger: "#skills",
+                start: "top 80%",
+                once: true,
+                onEnter() {
+                    anime.animate("#skills .sheet div", {
+                        opacity: [0, 1],
+                        x: [18, 0],
+                        delay: anime.stagger(70),
+                        duration: 460,
+                        ease: "out(3)"
+                    });
+                }
+            });
+
+            hover(".card", (element) => {
+                motionAnimate(element, { y: -4, borderColor: "rgba(61, 220, 255, 0.7)" }, { type: "spring", stiffness: 420, damping: 28 });
+                return () => motionAnimate(element, { y: 0, borderColor: "#24344a" }, { type: "spring", stiffness: 420, damping: 32 });
+            });
+
+            document.fonts.ready.then(() => ScrollTrigger.refresh());
+        }
+    </script>
 </body>
 </html>
