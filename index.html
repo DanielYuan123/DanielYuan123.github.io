@@ -253,6 +253,51 @@
             padding: 5px 9px;
         }
 
+        .badge-wall {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 22px;
+            margin: 6px 0 22px;
+        }
+
+        .badge-group p {
+            margin: 0 0 10px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .badge-group ul {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .badge-group li {
+            background: #f4f7fb;
+            border: 1px solid #d5deea;
+            min-height: 92px;
+            display: grid;
+            place-items: center;
+            padding: 12px 16px;
+            overflow: hidden;
+        }
+
+        .badge-group img {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            height: 46px;
+            object-fit: contain;
+        }
+
+        .badge-group img.mark-sustech { height: 84px; }
+
         .spec {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -466,6 +511,7 @@
             .topbar { gap: 12px; flex-wrap: wrap; }
             .topbar nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; }
             .hero { grid-template-columns: 1fr; gap: 18px; padding-top: 28px; }
+            .badge-wall { grid-template-columns: 1fr; }
             .portrait { width: 104px; height: 124px; }
             .spec { grid-template-columns: 1fr; }
             .spec div + div { border-left: 0; border-top: 1px solid var(--line); }
@@ -522,6 +568,23 @@
                         <li>Kubernetes</li>
                         <li>OpenTelemetry</li>
                         <li>Keycloak</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="badge-wall" aria-label="Schools and companies">
+                <div class="badge-group">
+                    <p>Schools</p>
+                    <ul>
+                        <li><img src="img/rice_logo.png" alt="Rice University"></li>
+                        <li><img class="mark-sustech" src="img/SUSTech Logo.png" alt="Southern University of Science and Technology"></li>
+                    </ul>
+                </div>
+                <div class="badge-group">
+                    <p>Companies</p>
+                    <ul>
+                        <li><img src="img/mstech_logo.svg" alt="MSTech"></li>
+                        <li><img src="img/posit-logo.svg" alt="Posit"></li>
                     </ul>
                 </div>
             </section>
@@ -843,7 +906,8 @@
                 .from(".topbar", { y: -18, autoAlpha: 0, duration: 0.45 })
                 .from(".portrait", { y: 16, autoAlpha: 0, duration: 0.55 }, 0.08)
                 .from(".hero-copy > *", { y: 18, autoAlpha: 0, stagger: 0.07, duration: 0.5 }, 0.12)
-                .from(".spec div", { y: 16, autoAlpha: 0, stagger: 0.08, duration: 0.45 }, 0.28);
+                .from(".badge-group li", { y: 14, autoAlpha: 0, stagger: 0.06, duration: 0.4 }, 0.22)
+                .from(".spec div", { y: 16, autoAlpha: 0, stagger: 0.08, duration: 0.45 }, 0.32);
 
             gsap.utils.toArray(".rail").forEach((rail) => {
                 gsap.to(rail, {
@@ -899,6 +963,11 @@
             hover(".card", (element) => {
                 motionAnimate(element, { y: -4, borderColor: "rgba(61, 220, 255, 0.7)" }, { type: "spring", stiffness: 420, damping: 28 });
                 return () => motionAnimate(element, { y: 0, borderColor: "#24344a" }, { type: "spring", stiffness: 420, damping: 32 });
+            });
+
+            hover(".badge-group li", (element) => {
+                motionAnimate(element, { y: -3 }, { type: "spring", stiffness: 420, damping: 28 });
+                return () => motionAnimate(element, { y: 0 }, { type: "spring", stiffness: 420, damping: 32 });
             });
 
             document.fonts.ready.then(() => ScrollTrigger.refresh());
